@@ -1,7 +1,6 @@
 //router
 import Dashboard from "./views/Dashboard.js"
 import Posts from "./views/Posts.js"
-import Settings from "./views/Settings.js"
 import PostView from "./views/PostView.js"
 
 
@@ -57,9 +56,15 @@ window.addEventListener("popstate", router);
 
 document.addEventListener("DOMContentLoaded", ()=>{
     document.body.addEventListener("click", e => {
-        if(e.target.matches("[data-link]")){
+        // ajouter condition si clique sur icône <i>
+        if(e.target.matches("[data-link]")||e.target.classList.contains("bx")){
+            console.log(e.target);
+            let element = e.target;
+            if(e.target.classList.contains("bx")){
+                element=element.parentElement;
+            }
             e.preventDefault()
-            navigateTo(e.target.href)
+            navigateTo(element.href)
         }
     })
     router()

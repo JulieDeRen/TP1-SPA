@@ -6,6 +6,7 @@ export default class extends AbstractView {
         super(params)
         this.setTitle("Viewing Post")
         console.log(params)
+        console.log("test post view")
     }
 
     
@@ -58,17 +59,12 @@ export default class extends AbstractView {
         }
         else{
             let url = 'https://api.thecatapi.com/v1/images/' + article.reference_image_id;
-            let res;
 
             fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                res = this.cb(data);
-                console.log(res)
-                postView += `<img src="${res}" alt="image" class="img-post-views">
-                <p><a href='/post' data-link>Retour</a></p>
-                `
+                this.cb(data);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -76,33 +72,15 @@ export default class extends AbstractView {
 
             // let image = this.getCatImage(article.reference_image_id, this.cb.bind(this));
         
-            postView+= `<img src="${res}" alt="image" class="img-post-views"><p><a href='/' data-link>Retour</a></p>` ;
+            postView+= `<img src="" alt="image" class="img-post-views"><p><a href='/' data-link>Retour</a></p>` ;
 
         }
-        
         return postView;
     }
-
-
-    /*getCatImage(data, cb){
-        let url = 'https://api.thecatapi.com/v1/images/' + data;
-                        
-        fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-            let res = cb(data);
-            return res;
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-        
-           
-    } */
+    // Dans le callback sélectionner l'image, lui passer en attribut src la valeur de la propriété de la donnée fetchéee
     cb(data){
-        console.log(data.url);
-        return data.url;
+        let img = document.querySelector(".img-post-views");
+        img.src = data.url;
     }
 
 }

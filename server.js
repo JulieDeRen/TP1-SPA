@@ -7,6 +7,7 @@ const { PORT } = require('./config');
 const { API_KEY } = require('./config');
 const app=express();
 
+
 //app.get('/ticker=:id', function(req, res){ ...  ajout ... });
 function getDataCat(){
     let ticker = 'catData';
