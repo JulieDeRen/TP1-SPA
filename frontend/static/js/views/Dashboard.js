@@ -6,6 +6,7 @@ export default class extends AbstractView {
         this.setTitle("Dashboard")
         let inputAnimal = document.querySelector(".switch-button-checkbox");
         inputAnimal.addEventListener("click", this.redirection.bind(this));
+        this.imageHeader();
     }
 
 
@@ -24,16 +25,16 @@ export default class extends AbstractView {
           <div class="container">
     
             <div class="section-title">
-              <h1>Dog</h1>
+              <h2>Dogs</h2>
             </div>
     
             <div class="row">
               <div class="col-lg-12 d-flex justify-content-center">
                 <ul id="portfolio-flters">
                   <li data-filter="*" class="filter-active">All</li>
-                  <li data-filter=".filter-app">App</li>
-                  <li data-filter=".filter-card">Card</li>
-                  <li data-filter=".filter-web">Web</li>
+                  <li data-filter=".filter-app">Friendly</li>
+                  <li data-filter=".filter-card">Sportive</li>
+                  <li data-filter=".filter-web">Calm</li>
                 </ul>
               </div>
             </div>

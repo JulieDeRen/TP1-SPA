@@ -36,7 +36,12 @@ export default class extends AbstractView {
         console.log(article);
         let postView;
 
-        postView = `<h1>`+article.name+`</h1>`;
+        postView = `    <section id="portfolio" class="portfolio">
+                        <div class="container">
+                
+                        <div class="section-title">
+                            <h2>${article.name}</h2>
+                        </div>`;
         if(article.hasOwnProperty('origin')){
             postView += `<p>`+article.origin+`</p>`;
         }
@@ -75,6 +80,7 @@ export default class extends AbstractView {
             postView+= `<img src="" alt="image" class="img-post-views"><p><a href='/' data-link>Retour</a></p>` ;
 
         }
+        postView += `</div></section>`;
         return postView;
     }
     // Dans le callback sélectionner l'image, lui passer en attribut src la valeur de la propriété de la donnée fetchéee

@@ -1,6 +1,10 @@
+*{
+    box-sizing: border-box;
+}
 html {
     max-width: 100%;
     height: 100%;
+    max-width: 100vw;
 }
 
 body {
@@ -9,12 +13,14 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
 }
+
+/* ----------- nav ------------- */
 #nav {
     position: sticky;
     top: 0;
     z-index: 9999;
 }
-nav {
+#nav nav {
     padding: 0 calc(60px + 2rem);
     display: flex;
     flex-direction: row;
@@ -22,6 +28,7 @@ nav {
     width: 100%;
     background: #eeeeee;
 }
+
 
 .nav__link {
     display: inline-flex;
@@ -34,7 +41,10 @@ nav {
 
 .nav__link:hover {
     background: rgba(255, 255, 255, 0.05);
+    color: #009579;
 }
+
+/* -------------- App ------------- */
 
 #app {
     margin: 2em;
@@ -42,14 +52,15 @@ nav {
     font-weight: 500;
     position: relative;
     width: 100%;
-    margin-left: var(--nav-width);
+    /*margin-left: var(--nav-width);*/
 }
-#portfolio{
-    max-width: calc(100% - (var(--nav-width)));
-}
+
+/* ------ utilitaires ------- */
+
 
 a {
     color: #009579;
+    text-decoration: none;
 }
 
 .img-post-views {
@@ -73,15 +84,6 @@ body {
     color: #444444;
 }
 
-a {
-    color: #e43c5c;
-    text-decoration: none;
-}
-
-a:hover {
-    color: #ea6981;
-    text-decoration: none;
-}
 
 h1,
 h2,
@@ -113,14 +115,17 @@ section {
     font-size: 13px;
     letter-spacing: 1px;
     font-weight: 700;
-    padding: 8px 20px;
+    padding: 10px 25px 8px 25px;
     line-height: 1;
     margin: 0;
-    background: #fdeff2;
-    color: #e43c5c; 
+    background: #eeeeee; /* #fdeff2; */
+    color: #009579; /* #e43c5c;  */
     display: inline-block;
     text-transform: uppercase;
     border-radius: 50px;
+    font-size: 4rem;
+    font-weight: 800;
+    text-align: center;
 }
 
 .section-title h3 {
@@ -130,7 +135,7 @@ section {
 }
 
 .section-title h3 span {
-    color: #e43c5c;
+    color: #009579; /* #e43c5c; */
 }
 
 .section-title p {
@@ -195,6 +200,7 @@ section {
 .portfolio .portfolio-item {
     margin-bottom: 30px;
     overflow: hidden;
+    border-radius: 5px;
 }
 
 .portfolio .portfolio-item img {
@@ -205,6 +211,7 @@ section {
     height: 45vh;
     width: 100%;
     filter: saturate(1.6);
+    border-radius: 5px;
 }
 
 .portfolio .portfolio-item .portfolio-info {
@@ -217,6 +224,7 @@ section {
     transition: all ease-in-out 0.3s;
     background: rgb(215, 174, 10); /* rgb(0, 153, 255); rgb(0, 68, 255);*/ /*rgb(0, 145, 198);*/ /* #e43c5c;*/
     padding: 15px 20px;
+    border-radius: 0 0 5px 5px;
 }
 
 .portfolio .portfolio-item .portfolio-info h4 {
@@ -243,7 +251,7 @@ section {
 
 .portfolio .portfolio-item .portfolio-info .preview-link:hover,
 .portfolio .portfolio-item .portfolio-info .details-link:hover {
-    color: #f7c2cc;
+    color: #fff;
 }
 
 .portfolio .portfolio-item .portfolio-info .details-link {
@@ -280,7 +288,7 @@ section {
     height: 12px;
     background-color: #fff;
     opacity: 1;
-    border: 1px solid #e43c5c;
+    border: 1px solid #009579; /* #e43c5c; */
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
@@ -324,18 +332,13 @@ section {
     padding: 0;
 }
 
-.flexbox {
-    flex-direction: row;
-    justify-content: justify;
+/*-------------- Carrousel nommé portfolio ------------ */
+/* Source : Bootstrap template tempo section portfolio - code édité */
+#portfolio{
+    max-width: 100%; /* calc(100% - (var(--nav-width)));*/
 }
 
 /*------Hero banner ---------*/
-
-#hero img{
-    object-fit: cover;
-    width: 100%;
-    max-height: 100vh;
-}
 
 /*----------- Contenu sur image ------------- */
  /*** Format texte sur image commun à presque tous ***/
@@ -351,10 +354,10 @@ section {
   
   .content-on-image>img {
     position: absolute;
-    height: 100%;
     width: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: 50% 100%;
+    /*object-position: 50% 100%;*/
   }
   
   .content-on-image>* {
@@ -475,3 +478,42 @@ section {
       margin-left: -20px;
     }
   }
+
+/* --------- Aside ----------- */
+
+#aside {
+    display: flex;
+    flex-direction: column;
+    justify-content: justify;
+    position: relative;
+    width: 20vw; /*var(--nav-width);*/
+    bottom: 0;
+    background: #222222;
+}
+#aside nav {
+    padding: calc(60px + 2rem) calc(12px + 2rem);
+    position: absolute;
+    display: block;
+}
+
+#aside .aside__link {
+    display: inline-block;
+    padding: 15px;
+    text-decoration: none;
+    color: #eeeeee;
+    font-weight: 500;
+}
+
+#aside .aside__link:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* --------- Dispo page flex --------- */
+#flexbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: justify;
+    height: 100%;
+}
+
+
