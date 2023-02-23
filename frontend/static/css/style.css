@@ -1,5 +1,5 @@
 html {
-    width: 100%;
+    max-width: 100%;
     height: 100%;
 }
 
@@ -9,22 +9,27 @@ body {
     font-family: 'Quicksand', sans-serif;
     font-size: 18px;
 }
-
-nav {
-    position: fixed;
+#nav {
+    position: sticky;
     top: 0;
-    left: 0;
-    width: var(--nav-width);
-    height: 100vh;
-    background: #222222;
+    z-index: 9999;
+}
+nav {
+    padding: 0 calc(60px + 2rem);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    background: #eeeeee;
 }
 
 .nav__link {
-    display: block;
-    padding: 12px 18px;
+    display: inline-flex;
+    padding: 30px 20px;
     text-decoration: none;
-    color: #eeeeee;
+    color: #222222;
     font-weight: 500;
+    font-size: 1.5rem;
 }
 
 .nav__link:hover {
@@ -35,6 +40,12 @@ nav {
     margin: 2em;
     line-height: 1.5;
     font-weight: 500;
+    position: relative;
+    width: 100%;
+    margin-left: var(--nav-width);
+}
+#portfolio{
+    max-width: calc(100% - (var(--nav-width)));
 }
 
 a {
@@ -45,6 +56,7 @@ a {
     object-fit: cover;
     width: 100%;
 }
+
 
 /**
 * Template Name: Tempo - v4.10.0
@@ -311,3 +323,155 @@ section {
 .portfolio-details .portfolio-description p {
     padding: 0;
 }
+
+.flexbox {
+    flex-direction: row;
+    justify-content: justify;
+}
+
+/*------Hero banner ---------*/
+
+#hero img{
+    object-fit: cover;
+    width: 100%;
+    max-height: 100vh;
+}
+
+/*----------- Contenu sur image ------------- */
+ /*** Format texte sur image commun à presque tous ***/
+  
+ .content-on-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 100vh;
+  }
+  
+  .content-on-image>img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: 50% 100%;
+  }
+  
+  .content-on-image>* {
+    position: relative;
+    margin: 0;
+  }
+  
+  /* J'ai ajouté cette sélection pour libérer l'image et positionner le texte sur la zone neutre de l'image.  L'importance ce cette image se trouve aux yeux et bouches des bébés cougars.  De cette manière, à mon avis l'on apprécie davantage la beauté de l'image */
+  .content-on-image h1{ /* ou bien .content-on-image-accueil h1 */
+    /*margin-top: 150px; */
+    position: relative;
+    margin-bottom: 15px; 
+    font-size: 4rem;
+    font-weight: 800;
+    text-align: center;
+  }
+  
+  /* Format des boutons superposants les images */
+  .content-on-image a {
+    text-align: center;
+  }
+  
+  /* Rythme dans les éléments successifs */
+  .content-on-image>*+* {
+    margin-top: 20px;
+  }
+
+  /* ----------- Switch button --------------- */
+
+ /*** Boutons ***/
+/* Source : Nitish Tyagi https://codepen.io/nikkk-me/pen/abvPjeG *Modifié */
+#switch-button.switch-button {
+    background: rgba(255, 255, 255, 0.65);
+    border-radius: 50px;
+    overflow: hidden;
+    width: 140px;
+    text-align: center;
+    font-size: var(--switch-button);
+    color: var(--color-main-darkened);
+    font-weight: bold;
+    position: relative;
+    padding-right: 70px;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    z-index: 9;
+  }
+  
+  #switch-button.switch-button:before {
+    content: "Cat";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    pointer-events: none;
+  }
+  
+  #switch-button .switch-button-checkbox {
+    cursor: pointer;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 2;
+  }
+  
+  #switch-button .switch-button-checkbox:checked + .switch-button-label:before {
+    transform: translateX(70px);
+    transition: transform 300ms linear;
+  }
+  
+  #switch-button .switch-button-checkbox + .switch-button-label {
+    position: relative;
+    padding: 15px 0;
+    display: block;
+    user-select: none;
+    pointer-events: none;
+    font-size: var(--switch-button);
+  }
+  
+  #switch-button .switch-button-checkbox + .switch-button-label:before {
+    content: "";
+    background: white;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0; 
+    border-radius: 50px;
+    transform: translateX(0);
+    transition: transform 300ms;
+  }
+  
+  #switch-button .switch-button-checkbox + .switch-button-label .switch-button-label-span {
+    position: relative;
+  }
+  
+  @media all and (max-width: 615px){
+    /* Alléger la composition pour support mobile : effet de retrait de la navigation lors du défilement vers le bas */
+    #switch-button.switch-button{
+      margin-top : 100px;
+    }
+  }
+  
+  @media all and (max-width: 450px){
+    #switch-button.switch-button{
+      margin-left: -20px;
+    }
+  }
+  
+  @media all and (max-width: 415px){
+    #switch-button.switch-button{
+      margin-left: -20px;
+    }
+  }

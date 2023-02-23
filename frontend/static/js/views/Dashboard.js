@@ -4,7 +4,10 @@ export default class extends AbstractView {
     constructor(params){
         super(params)
         this.setTitle("Dashboard")
+        let inputAnimal = document.querySelector(".switch-button-checkbox");
+        inputAnimal.addEventListener("click", this.redirection.bind(this));
     }
+
 
     async getHtml() {
         async function getData(url){
