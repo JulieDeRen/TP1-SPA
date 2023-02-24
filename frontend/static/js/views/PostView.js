@@ -26,6 +26,7 @@ export default class extends AbstractView {
     }
 
     async search(e) {
+        console.log(this.#animal)
         async function getData(url) {
             console.log(url)
             const response = await fetch(url)
@@ -100,7 +101,7 @@ export default class extends AbstractView {
                                        <div class="portfolio-info" style="position:absolute">
                                            <h4>${uneData['name']}</h4>
                                            <p>${uneData['origin']}</p>
-                                           <a href="${this.#animal}/post-view/${uneData['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${data[i]['name']}" data-link><i class="bx bx-plus"></i></a>
+                                           <a href="${this.#animal}/post-view/${uneData['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${uneData['name']}" data-link><i class="bx bx-plus"></i></a>
                                            <a href="${this.#animal}/post-view/${uneData['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                                        </div>
                                    </div>`
