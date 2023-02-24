@@ -490,6 +490,12 @@ section {
     bottom: 0;
     background: #222222;
 }
+.aside {
+    position: relative;
+    width: calc(20vw - 14px); /*var(--nav-width);*/
+    bottom: 0;
+    background: #222222;
+}
 #aside nav {
     padding: calc(60px + 2rem) calc(12px + 2rem);
     position: absolute;
@@ -520,7 +526,7 @@ section {
 
 #form-inline{
     display: inline-flex;
-    padding: 15px 20px;
+    padding: 10px 15px;
     vertical-align: middle;
     margin-top: auto;
     margin-bottom: auto;
@@ -529,20 +535,27 @@ section {
 }
 #form-inline .form-control{
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 10px 15px;
 }
-#form-inline .btn-outline{
+#form-inline .btn-outline, 
+#contact .btn-contact:hover{
     border: 1px solid #009579;
     color: #009579;
 }
-#form-inline .btn:hover{
+#form-inline .btn:hover,
+#contact .btn-contact{
     background-color: #009579;
     color: white;
 }
 #form-inline .btn{
     border-radius: 15px;
-    padding: 15px 20px;
+    padding: 10px 15px;
     border: 1px solid #009579;
     color: #009579;
 }
+#contact{
+    width: 100%;
+    padding: 2rem;
+}
+
 
