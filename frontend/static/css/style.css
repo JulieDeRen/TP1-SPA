@@ -493,11 +493,11 @@ section {
 #aside nav {
     padding: calc(60px + 2rem) calc(12px + 2rem);
     position: absolute;
-    display: block;
+    display: inline-block;
 }
 
 #aside .aside__link {
-    display: inline-block;
+    display: block;
     padding: 15px;
     text-decoration: none;
     color: #eeeeee;
@@ -516,4 +516,33 @@ section {
     height: 100%;
 }
 
+/* -------- Form ----------- */
+
+#form-inline{
+    display: inline-flex;
+    padding: 15px 20px;
+    vertical-align: middle;
+    margin-top: auto;
+    margin-bottom: auto;
+    gap: 2px;
+    z-index: 999;
+}
+#form-inline .form-control{
+    border-radius: 15px;
+    padding: 15px 20px;
+}
+#form-inline .btn-outline{
+    border: 1px solid #009579;
+    color: #009579;
+}
+#form-inline .btn:hover{
+    background-color: #009579;
+    color: white;
+}
+#form-inline .btn{
+    border-radius: 15px;
+    padding: 15px 20px;
+    border: 1px solid #009579;
+    color: #009579;
+}
 

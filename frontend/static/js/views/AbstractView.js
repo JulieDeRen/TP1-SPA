@@ -8,6 +8,7 @@ export default class {
     redirection(e){
         e.target.classList.toggle("cat");
         console.log(e.target);
+        
         if(e.target.classList.contains("cat")){
             window.location.replace("http://localhost:8082/cat");
         }
@@ -35,6 +36,20 @@ export default class {
                             <a href="/dog" class="aside__link" data-link>Dog</a>
                         </nav>`
         return aside;
+    }
+    async search(datas, e){
+        console.log(typeof(datas));
+        // aller sélectionner la valeur de l'input qui est avant le e.target
+        let input = document.querySelector(".form-control").value;
+        var res=[];
+        res = datas.filter(data=> ((JSON.stringify(data)).toUpperCase()).includes((String(input)).toUpperCase()));
+        return res;
+    }
+    typeAnimal(animalTitre){
+        animalTitre = animalTitre.slice(1);
+        animalTitre = animalTitre.charAt(0).toUpperCase() + animalTitre.slice(1)
+        animalTitre = animalTitre.concat("s");
+        return animalTitre;
     }
 
     async getHtml() {

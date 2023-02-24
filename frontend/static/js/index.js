@@ -3,7 +3,6 @@ import Dashboard from "./views/Dashboard.js"
 import Posts from "./views/Posts.js"
 import PostView from "./views/PostView.js"
 
-
 const pathToRegex = path => new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$")
 
 const getParams = match => {
@@ -21,6 +20,8 @@ const router = async () => {
         {path: "/", view:Dashboard},
         {path: "/cat", view:Posts},
         {path: "/dog", view:Posts},
+        {path: "/cat/", view:Posts},
+        {path: "/dog/", view:Posts},
         {path: '/cat/post-view/:id', view: PostView},
         {path: '/dog/post-view/:id', view: PostView}
     ]

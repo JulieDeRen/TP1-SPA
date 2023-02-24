@@ -1,14 +1,81 @@
 import AbstractView from "./AbstractView.js";
 
 export default class extends AbstractView {
+    #datas;
     constructor(params){
         super(params)
         this.setTitle("Dashboard")
         let inputAnimal = document.querySelector(".switch-button-checkbox");
         inputAnimal.addEventListener("click", this.redirection.bind(this));
+
+        // header hero banner selon cat ou dog
         this.imageHeader();
+
+        // aside affichage
+        this.aside();
+
+      let button = document.querySelector("button.btn.btn-outline");
+      button.addEventListener("click", this.search.bind(this));
+  
     }
 
+    search(e){
+      // envoyer le set de data en paramètre lorsque bouton click
+      const abstractView = new AbstractView();
+      let res = abstractView.search(this.#datas);
+      const promise = Promise.resolve(res);
+      promise.then((value)=>{
+        console.log(value)
+        let datas = value;
+        let post = `
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+          <div class="container">
+    
+            <div class="section-title">
+              <h2>Dogs</h2>
+            </div>
+    
+            <div class="row">
+              <div class="col-lg-12 d-flex justify-content-center">
+                <ul id="portfolio-flters">
+                  <li data-filter="*" class="filter-active">All</li>
+                  <li data-filter=".filter-app">Friendly</li>
+                  <li data-filter=".filter-card">Sportive</li>
+                  <li data-filter=".filter-web">Calm</li>
+                </ul>
+              </div>
+            </div>
+            <div class="row portfolio-container" style="position:relative">`
+    
+            let animal = "dog";
+            for(let i in datas){
+                let img = datas[i]['image']['url'];
+
+                post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
+                            <img src="${img}" class="img-fluid" alt="">
+                            <div class="portfolio-info" style="position:absolute">
+                                <h4>${datas[i]['name']}</h4>
+                                <p>${datas[i]['origin']}</p>
+                                <a href="${animal}/post-view/${datas[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${datas[i]['name']}" data-link><i class="bx bx-plus"></i></a>
+                                <a href="${animal}/post-view/${datas[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                            </div>
+                        </div>`
+            };
+            post +=`</div>
+                    </div>
+                    </section><!-- End Portfolio Section -->`;
+
+            const app = document.getElementById("app");
+
+            app.innerHTML="";
+            console.log(app);
+            app.innerHTML=post;
+
+      })
+    
+
+    }
 
     async getHtml() {
         async function getData(url){
@@ -17,7 +84,8 @@ export default class extends AbstractView {
         }
         // console.log(window.location.pathname);
         let animal = "dog";
-        const data = await getData('/static/js/views/data/dogData.json');
+        this.#datas = await getData('/static/js/views/data/dogData.json');
+         
         
         let post = `
         <!-- ======= Portfolio Section ======= -->
@@ -41,22 +109,23 @@ export default class extends AbstractView {
             <div class="row portfolio-container" style="position:relative">`
     
             
-            for(let i in data){
-                let img = data[i]['image']['url'];
+            for(let i in this.#datas){
+                let img = this.#datas[i]['image']['url'];
 
                 post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
                             <img src="${img}" class="img-fluid" alt="">
                             <div class="portfolio-info" style="position:absolute">
-                                <h4>${data[i]['name']}</h4>
-                                <p>${data[i]['origin']}</p>
-                                <a href="${animal}/post-view/${data[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${data[i]['name']}" data-link><i class="bx bx-plus"></i></a>
-                                <a href="${animal}/post-view/${data[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                                <h4>${this.#datas[i]['name']}</h4>
+                                <p>${this.#datas[i]['origin']}</p>
+                                <a href="${animal}/post-view/${this.#datas[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${this.#datas[i]['name']}" data-link><i class="bx bx-plus"></i></a>
+                                <a href="${animal}/post-view/${this.#datas[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                             </div>
                         </div>`
-            };
-        post +=`</div>
-                </div>
-                </section><!-- End Portfolio Section -->`;
+                    };
+                post +=`</div>
+                        </div>
+                        </section><!-- End Portfolio Section -->`;
+                        // search bar
 
 
         // Ref : Template-Tempo-Bootstrap

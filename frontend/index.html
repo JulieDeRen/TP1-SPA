@@ -36,13 +36,20 @@
             <a href="/" class="nav__link" data-link>Home</a>
             <a href="/cat" class="nav__link" data-link>Cat</a>
             <a href="/dog" class="nav__link" data-link>Dog</a>
+            <form id="form-inline">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline" type="button">Search</button>
+            </form>
         </nav>
     </div>
     <div class="flexbox" id="flexbox">
         <div class="aside" id="aside"></div>
         <div id="app"></div>
     </div>
-    <script type="module" src="./static/js/index.js"></script>
+    <!-- To debug <script>
+        console.log(window.location.pathname);
+    </script> -->
+    <script type="module" src="/static/js/index.js"></script>
 
 </body>
 </html>
