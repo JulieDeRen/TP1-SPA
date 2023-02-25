@@ -1,6 +1,7 @@
-*{
+* {
     box-sizing: border-box;
 }
+
 html {
     max-width: 100%;
     height: 100%;
@@ -20,6 +21,7 @@ body {
     top: 0;
     z-index: 9999;
 }
+
 #nav nav {
     padding: 0 calc(60px + 2rem);
     display: flex;
@@ -118,8 +120,10 @@ section {
     padding: 10px 25px 8px 25px;
     line-height: 1;
     margin: 0;
-    background: #eeeeee; /* #fdeff2; */
-    color: #009579; /* #e43c5c;  */
+    background: #eeeeee;
+    /* #fdeff2; */
+    color: #009579;
+    /* #e43c5c;  */
     display: inline-block;
     text-transform: uppercase;
     border-radius: 50px;
@@ -135,7 +139,8 @@ section {
 }
 
 .section-title h3 span {
-    color: #009579; /* #e43c5c; */
+    color: #009579;
+    /* #e43c5c; */
 }
 
 .section-title p {
@@ -190,7 +195,8 @@ section {
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
     color: #fff;
-    background: #35a8a4; /* #e43c5c;*/
+    background: #35a8a4;
+    /* #e43c5c;*/
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -222,7 +228,10 @@ section {
     bottom: -50px;
     z-index: 3;
     transition: all ease-in-out 0.3s;
-    background: rgb(215, 174, 10); /* rgb(0, 153, 255); rgb(0, 68, 255);*/ /*rgb(0, 145, 198);*/ /* #e43c5c;*/
+    background: rgb(215, 174, 10);
+    /* rgb(0, 153, 255); rgb(0, 68, 255);*/
+    /*rgb(0, 145, 198);*/
+    /* #e43c5c;*/
     padding: 15px 20px;
     border-radius: 0 0 5px 5px;
 }
@@ -288,11 +297,13 @@ section {
     height: 12px;
     background-color: #fff;
     opacity: 1;
-    border: 1px solid #009579; /* #e43c5c; */
+    border: 1px solid #009579;
+    /* #e43c5c; */
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-    background: #6db304; /* #e43c5c;*/
+    background: #6db304;
+    /* #e43c5c;*/
 }
 
 .portfolio-details .portfolio-info {
@@ -334,60 +345,62 @@ section {
 
 /*-------------- Carrousel nommé portfolio ------------ */
 /* Source : Bootstrap template tempo section portfolio - code édité */
-#portfolio{
-    max-width: 100%; /* calc(100% - (var(--nav-width)));*/
+#portfolio {
+    max-width: 100%;
+    /* calc(100% - (var(--nav-width)));*/
 }
 
 /*------Hero banner ---------*/
 
 /*----------- Contenu sur image ------------- */
- /*** Format texte sur image commun à presque tous ***/
-  
- .content-on-image {
+/*** Format texte sur image commun à presque tous ***/
+
+.content-on-image {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     height: 100vh;
-  }
-  
-  .content-on-image>img {
+}
+
+.content-on-image>img {
     position: absolute;
     width: 100%;
     height: 100%;
     object-fit: cover;
     /*object-position: 50% 100%;*/
-  }
-  
-  .content-on-image>* {
+}
+
+.content-on-image>* {
     position: relative;
     margin: 0;
-  }
-  
-  /* J'ai ajouté cette sélection pour libérer l'image et positionner le texte sur la zone neutre de l'image.  L'importance ce cette image se trouve aux yeux et bouches des bébés cougars.  De cette manière, à mon avis l'on apprécie davantage la beauté de l'image */
-  .content-on-image h1{ /* ou bien .content-on-image-accueil h1 */
+}
+
+/* J'ai ajouté cette sélection pour libérer l'image et positionner le texte sur la zone neutre de l'image.  L'importance ce cette image se trouve aux yeux et bouches des bébés cougars.  De cette manière, à mon avis l'on apprécie davantage la beauté de l'image */
+.content-on-image h1 {
+    /* ou bien .content-on-image-accueil h1 */
     /*margin-top: 150px; */
     position: relative;
-    margin-bottom: 15px; 
+    margin-bottom: 15px;
     font-size: 4rem;
     font-weight: 800;
     text-align: center;
-  }
-  
-  /* Format des boutons superposants les images */
-  .content-on-image a {
+}
+
+/* Format des boutons superposants les images */
+.content-on-image a {
     text-align: center;
-  }
-  
-  /* Rythme dans les éléments successifs */
-  .content-on-image>*+* {
+}
+
+/* Rythme dans les éléments successifs */
+.content-on-image>*+* {
     margin-top: 20px;
-  }
+}
 
-  /* ----------- Switch button --------------- */
+/* ----------- Switch button --------------- */
 
- /*** Boutons ***/
+/*** Boutons ***/
 /* Source : Nitish Tyagi https://codepen.io/nikkk-me/pen/abvPjeG *Modifié */
 #switch-button.switch-button {
     background: rgba(255, 255, 255, 0.65);
@@ -404,9 +417,9 @@ section {
     top: 20px;
     left: 40px;
     z-index: 9;
-  }
-  
-  #switch-button.switch-button:before {
+}
+
+#switch-button.switch-button:before {
     content: "Cat";
     position: absolute;
     top: 0;
@@ -418,66 +431,67 @@ section {
     justify-content: center;
     z-index: 999;
     pointer-events: none;
-  }
-  
-  #switch-button .switch-button-checkbox {
+}
+
+#switch-button .switch-button-checkbox {
     cursor: pointer;
     position: absolute;
     width: 100%;
     height: 100%;
     opacity: 0;
     z-index: 2;
-  }
-  
-  #switch-button .switch-button-checkbox:checked + .switch-button-label:before {
+}
+
+#switch-button .switch-button-checkbox:checked+.switch-button-label:before {
     transform: translateX(70px);
     transition: transform 300ms linear;
-  }
-  
-  #switch-button .switch-button-checkbox + .switch-button-label {
+}
+
+#switch-button .switch-button-checkbox+.switch-button-label {
     position: relative;
     padding: 15px 0;
     display: block;
     user-select: none;
     pointer-events: none;
     font-size: var(--switch-button);
-  }
-  
-  #switch-button .switch-button-checkbox + .switch-button-label:before {
+}
+
+#switch-button .switch-button-checkbox+.switch-button-label:before {
     content: "";
     background: white;
     height: 100%;
     width: 100%;
     position: absolute;
     left: 0;
-    top: 0; 
+    top: 0;
     border-radius: 50px;
     transform: translateX(0);
     transition: transform 300ms;
-  }
-  
-  #switch-button .switch-button-checkbox + .switch-button-label .switch-button-label-span {
+}
+
+#switch-button .switch-button-checkbox+.switch-button-label .switch-button-label-span {
     position: relative;
-  }
-  
-  @media all and (max-width: 615px){
+}
+
+@media all and (max-width: 615px) {
+
     /* Alléger la composition pour support mobile : effet de retrait de la navigation lors du défilement vers le bas */
-    #switch-button.switch-button{
-      margin-top : 100px;
+    #switch-button.switch-button {
+        margin-top: 100px;
     }
-  }
-  
-  @media all and (max-width: 450px){
-    #switch-button.switch-button{
-      margin-left: -20px;
+}
+
+@media all and (max-width: 450px) {
+    #switch-button.switch-button {
+        margin-left: -20px;
     }
-  }
-  
-  @media all and (max-width: 415px){
-    #switch-button.switch-button{
-      margin-left: -20px;
+}
+
+@media all and (max-width: 415px) {
+    #switch-button.switch-button {
+        margin-left: -20px;
     }
-  }
+}
 
 /* --------- Aside ----------- */
 
@@ -486,15 +500,18 @@ section {
     flex-direction: column;
     justify-content: justify;
     position: relative;
-    width: 20vw; /*var(--nav-width);*/
+    width: 20vw;
+    /*var(--nav-width);*/
     bottom: 0;
     background: #222222;
 }
 
 #aside nav {
-    padding: calc(60px + 2rem) calc(12px + 2rem);
+    padding: calc(60px + 2rem) 15px;
     position: absolute;
     display: inline-block;
+    z-index: 2;
+    overflow: hidden;
 }
 
 #aside .aside__link {
@@ -519,7 +536,7 @@ section {
 
 /* -------- Search ----------- */
 
-#form-inline{
+#form-inline {
     display: inline-flex;
     padding: 10px 15px;
     vertical-align: middle;
@@ -528,46 +545,81 @@ section {
     gap: 2px;
     z-index: 999;
 }
-#form-inline .form-control{
+
+#form-inline .form-control {
     border-radius: 15px;
     padding: 10px 15px;
 }
-#form-inline .btn-outline{
+
+#form-inline .btn-outline {
     border: 1px solid #009579;
     color: #009579;
 }
 
-#contact .btn-contact:hover{
+#contact .btn-contact:hover {
     border: 1px solid #009579;
     color: #009579;
     background-color: white;
 }
+
 #form-inline .btn:hover,
-#contact .btn-contact{
+#contact .btn-contact {
     background-color: #009579;
     color: white;
 }
-#form-inline .btn{
+
+#form-inline .btn {
     border-radius: 15px;
     padding: 10px 15px;
     border: 1px solid #009579;
     color: #009579;
 }
+
 /* ---------- Contact section----------- */
-#contact{
+#contact {
     width: 100%;
     padding: 2rem;
 }
+
 .aside {
     position: relative;
-    width: calc(20vw - 13px); /*var(--nav-width);*/
+    width: calc(20vw - 13px);
+    /*var(--nav-width);*/
     bottom: 0;
     background: #222222;
+    z-index: -1;
 }
 
 /* ----------- Image view post ------------ */
-.img-post-views{
+.img-post-views {
     border-radius: 5px;
 }
 
+/* -------------Aside accordéon ---------- */
+/* Style the buttons that are used to open and close the accordion panel */
+/* Source : https://www.w3schools.com/howto/howto_js_accordion.asp */
+.accordion {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
 
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover {
+    background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+    padding: 0 18px;
+    background-color: white;
+    display: none;
+    overflow: hidden;
+}

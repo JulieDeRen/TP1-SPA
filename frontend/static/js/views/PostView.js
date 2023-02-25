@@ -3,14 +3,14 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     #animal;
     #datas;
-    constructor(params){
+    #oAbstractView;
+    constructor(params) {
         super(params)
         this.setTitle("Viewing Post");
         this.deleteHeader();
-        console.log("test post view")
         this.#animal = window.location.pathname;
+        this.#oAbstractView = new AbstractView(this.#datas);
 
-        this.deleteHeader();
         this.aside();
 
         // bouton search
@@ -18,40 +18,43 @@ export default class extends AbstractView {
         button.addEventListener("click", this.search.bind(this));
     }
 
+    // fonction de recherche
     async search(e) {
-        // console.log(this.#animal)
         async function getData(url) {
-            // console.log(url)
+            console.log(url)
             const response = await fetch(url)
             return response.json()
         }
-        
-        if(this.#animal.includes("cat")){
+        // condition pour éviter que ex :  /cat soit /cat/
+        if (this.#animal.includes("cat")) {
             this.#animal = "/cat";
         }
-        else{
-            this.#animal ="/dog";
+        else {
+            this.#animal = "/dog";
         }
-        let animal = this.#animal;
-        // console.log(animal)
 
-        // récupérer les données
+
+        // récupérer les données du fichier json et passer en paramètre de la fonction search dna la classe AbstractView
         const data = await getData('/static/js/views/data' + this.#animal + 'Data.json');
-        // envoyer le set de data en paramètre lorsque bouton click
-        const abstractView = new AbstractView();
-        let res = abstractView.search(data);
+        let res = this.#oAbstractView.search(data);
         const promise = Promise.resolve(res);
         promise.then((value) => {
-            let datas = value;
+            this.#datas = value;
             // console.log(value)
-            
-            let animal = this.#animal;
-            // enlever le slash first char
-            let abstractView = new AbstractView;
-            animal = abstractView.typeAnimal(animal);
-            
+            this.cbSearch(this.#datas)
+        })
 
-            let post = `
+
+
+    }
+    // fonction de rappel pour afficher les données recherchées
+    cbSearch(datas) {
+        let animal = this.#animal;
+        // enlever le slash first char fonction crée dans AbstractView
+        animal = this.#oAbstractView.typeAnimal(animal);
+
+
+        let post = `
             <!-- ======= Portfolio Section Ref : BootstrapMade template Tempo======= -->
             <section id="portfolio" class="portfolio">
               <div class="container">
@@ -71,25 +74,25 @@ export default class extends AbstractView {
                   </div>
                 </div>
                 <div class="row portfolio-container" style="position:relative">`
-   
-           let img;
-           let url;
-           datas.forEach((uneData)=>{
-   
-               if (this.#animal.includes("cat")) {
-                   if (uneData.hasOwnProperty('reference_image_id')) {
-                       url = 'https://api.thecatapi.com/v1/images/' + uneData['reference_image_id'];
-                       console.log(url);
-                       fetch(url)
-                           .then((response) => response.json())
-                           .then((uneData) => {
-                               console.log('Success:', uneData);
-                               cb(uneData);
-                           })
-                           .catch((error) => {
-                               console.error('Error:', error);
-                           });
-                       post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
+
+        let img;
+        let url;
+        datas.forEach((uneData) => {
+
+            if (this.#animal.includes("cat")) {
+                if (uneData.hasOwnProperty('reference_image_id')) {
+                    url = 'https://api.thecatapi.com/v1/images/' + uneData['reference_image_id'];
+                    console.log(url);
+                    fetch(url)
+                        .then((response) => response.json())
+                        .then((uneData) => {
+                            console.log('Success:', uneData);
+                            cb(uneData);
+                        })
+                        .catch((error) => {
+                            console.error('Error:', error);
+                        });
+                    post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
                                        <img src="${img}" class="img-fluid" alt="image carte" data-img="${uneData['reference_image_id']}">
                                        <div class="portfolio-info" style="position:absolute">
                                            <h4>${uneData['name']}</h4>
@@ -98,16 +101,27 @@ export default class extends AbstractView {
                                            <a href="${this.#animal}/post-view/${uneData['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                                        </div>
                                    </div>`
-                   }
-   
-               }
-   
-               else {
-   
-                   img = uneData['image']['url'];
-   
-   
-                   post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
+                }
+                // contion de rappel pour associer les url à chaque src d'image
+                function cb(data) {
+
+                    let img = document.querySelectorAll(".img-fluid");
+                    img.forEach((uneImg) => {
+
+                        if (uneImg.dataset.img == data.id) {
+                            uneImg.src = data.url;
+                        }
+                    })
+                }
+
+            }
+
+            else {
+
+                img = uneData['image']['url'];
+
+
+                post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
                                    <img src="${img}" class="img-fluid" alt="image carte">
                                    <div class="portfolio-info" style="position:absolute">
                                        <h4>${uneData['name']}</h4>
@@ -116,57 +130,42 @@ export default class extends AbstractView {
                                        <a href="${this.#animal}/post-view/${uneData['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                                    </div>
                                </div>`
-               };
-           })
-           post += `</div>
+            };
+        })
+        post += `</div>
                        </div>
                        </section><!-- End Portfolio Section -->`;
 
-            const app = document.getElementById("app");
+        const app = document.getElementById("app");
 
-            app.innerHTML = "";
-            console.log(app);
-            app.innerHTML = post;
-
-        })
-
-        function cb(data) {
-
-            let img = document.querySelectorAll(".img-fluid");
-            img.forEach((uneImg) => {
-    
-                if (uneImg.dataset.img == data.id) {
-                    uneImg.src = data.url;
-                }
-            })
-        }
-
-
+        app.innerHTML = "";
+        console.log(app);
+        app.innerHTML = post;
     }
 
     async getHtml() {
-       // console.log(this.params.id)
-        const nu  = Number(this.params.id)
+        // console.log(this.params.id)
+        const nu = Number(this.params.id)
 
-        async function getData(url){
+        async function getData(url) {
             const response = await fetch(url)
             return response.json()
         }
 
-        
-        console.log(window.location.pathname)
+
+        // console.log(window.location.pathname)
         let animal = String(window.location.pathname);
-        console.log(typeof(animal));
-        if(animal.includes('/cat')){
+        // console.log(typeof(animal));
+        if (animal.includes('/cat')) {
             animal = '/cat'
         }
-        else if(animal.includes('/dog')){
+        else if (animal.includes('/dog')) {
             animal = '/dog'
         }
         const data = await getData('/static/js/views/data' + animal + 'Data.json');
 
         const article = data.find(item => String(item.id) === this.params.id)
-        console.log(article);
+        // console.log(article);
         let postView;
 
         postView = `    <section id="portfolio" class="portfolio">
@@ -175,47 +174,47 @@ export default class extends AbstractView {
                         <div class="section-title">
                             <h2>${article.name}</h2>
                         </div>`;
-        if(article.hasOwnProperty('origin')){
-            postView += `<p>`+article.origin+`</p>`;
+        if (article.hasOwnProperty('origin')) {
+            postView += `<p>` + article.origin + `</p>`;
         }
-        if(article.hasOwnProperty('bred_for')){
-            postView += `<p>This breed is for `+article.bred_for+`</p>`;
+        if (article.hasOwnProperty('bred_for')) {
+            postView += `<p>This breed is for ` + article.bred_for + `</p>`;
         }
-        if(article.hasOwnProperty('breed_group')){
-            postView += `<p>Group: `+article.breed_group+`</p>`;
+        if (article.hasOwnProperty('breed_group')) {
+            postView += `<p>Group: ` + article.breed_group + `</p>`;
         }
-        if(article.hasOwnProperty('description')){
-            postView += `<p>`+article.description+`</p>`;
+        if (article.hasOwnProperty('description')) {
+            postView += `<p>` + article.description + `</p>`;
         }
-        postView += `<p>`+article.temperament+`</p>
-        <p>Weight `+article.weight.imperial+` pounds</p>`;
+        postView += `<p>` + article.temperament + `</p>
+        <p>Weight `+ article.weight.imperial + ` pounds</p>`;
 
-        if(article.hasOwnProperty('image')){
+        if (article.hasOwnProperty('image')) {
             postView += `<img src="${article.image.url}" alt="image" class="img-post-views">`
         }
-        else{
+        else {
             let url = 'https://api.thecatapi.com/v1/images/' + article.reference_image_id;
 
             fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-                console.log('Success:', data);
-                this.cb(data);
-            })
-            .catch((error) => {
-                console.error('Error:', error);
-            });
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log('Success:', data);
+                    this.cb(data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
 
             // let image = this.getCatImage(article.reference_image_id, this.cb.bind(this));
-        
-            postView+= `<img src="" alt="image" class="img-post-views"><p><a href='/' data-link>Retour</a></p>` ;
+
+            postView += `<img src="" alt="image" class="img-post-views">`;
 
         }
         postView += `</div></section>`;
         return postView;
     }
     // Dans le callback sélectionner l'image, lui passer en attribut src la valeur de la propriété de la donnée fetchéee
-    cb(data){
+    cb(data) {
         let img = document.querySelector(".img-post-views");
         img.src = data.url;
     }

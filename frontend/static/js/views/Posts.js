@@ -8,28 +8,15 @@ export default class extends AbstractView {
         super(params)
         this.setTitle("Posts")
         this.#animal = window.location.pathname;
-        this.#oAbstractView=new AbstractView(this.#datas);
+        this.#oAbstractView = new AbstractView(this.#datas);
 
         // traiter le pathname si termine par "/"
         if (this.#animal.charAt(this.#animal.length - 1) == '/') {
             this.#animal.slice(0, -1);
         }
 
-        // check if header exist -- in postView header is earased;
+        this.afficherHeader();
         const header = document.querySelector("#header");
-        console.log(header.childNodes.length);
-        // Si pas de header, afficher
-        if (header.childNodes.length === 0) {
-            header.innerHTML = ` <header class="content-on-image box-shadow content-on-image-accueil" id="header">
-                                    <img src="/static/assets/img/gerrard_getthings_hero.jpeg" alt="gerrard getthings" class="img-header">
-                                    <!--Source : Nitish Tyagi https://codepen.io/nikkk-me/pen/abvPjeG * Modifié-->
-                                    <div class="switch-button" id="switch-button">
-                                        <input name = "langue" class="switch-button-checkbox" type="checkbox"><!--si c'est checked == cat-->
-                                        <label class="switch-button-label" for="langue"><span class="switch-button-label-span">Dog</span></label>
-                                    </div>
-                                    <h1>Looking for a<br>Companion?</h1>
-                                </header>`
-        }
         if (header.childNodes.length > 0) {
             // switch button redirectionner
             let switchButton = document.querySelector(".switch-button-checkbox");
@@ -45,8 +32,10 @@ export default class extends AbstractView {
 
 
         // Header hero banner and aside a insérer dans le dom
+        
         this.imageHeader();
-        this.aside();
+        console.log(this.#animal);
+        this.aside(this.#animal);
 
         let button = document.querySelector("button.btn.btn-outline");
         button.addEventListener("click", this.search.bind(this));
@@ -220,7 +209,7 @@ export default class extends AbstractView {
             if (this.#animal.includes("cat")) {
                 if (this.#datas[i].hasOwnProperty('reference_image_id')) {
                     url = 'https://api.thecatapi.com/v1/images/' + this.#datas[i]['reference_image_id'];
-                    console.log(url);
+                    // console.log(url);
                     fetch(url)
                         .then((response) => response.json())
                         .then((data) => {

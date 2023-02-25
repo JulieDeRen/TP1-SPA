@@ -8,7 +8,7 @@ const { API_KEY } = require('./config');
 const app=express();
 
 
-//app.get('/ticker=:id', function(req, res){ ...  ajout ... });
+// obtenir données chats
 function getDataCat(){
     let ticker = 'catData';
     let url = 'https://api.thecatapi.com/v1/breeds';
@@ -47,6 +47,7 @@ function getCatImage(){
                 request.get({
                     url: url,
                     json: true,
+                    mode: 'cors',
                     headers: {'User-Agent': 'request'}
                 }, (err, res, data) => {
                     if (err) {
@@ -57,22 +58,21 @@ function getCatImage(){
                     // data is successfully parsed as a JSON object:
                     newData += JSON.stringify(data)
                     }
-                    console.log(newData);
-                    fs.writeFile('./frontend/static/js/views/data/' + ticker + '.json', newData, err => {
-                        if(err) throw err;
-                        // console.log(newData);
-                        console.log("success");
-                    })
+
                 })
 
 
+            })
+            // Écrire le fichier json pour les images de chats
+            fs.writeFile('./frontend/static/js/views/data/' + ticker + '.json', newData, err => {
+                if(err) throw err;
             })
 
         })
      
 }
 
-
+// données chiens
 function getDataDog(){
     let ticker = 'dogData';
     let url = 'https://api.thedogapi.com/v1/breeds';
