@@ -3,10 +3,12 @@ import AbstractView from "./AbstractView.js";
 export default class extends AbstractView {
     #animal;
     #datas;
+    #oAbstractView;
     constructor(params) {
         super(params)
         this.setTitle("Posts")
         this.#animal = window.location.pathname;
+        this.#oAbstractView=new AbstractView(this.#datas);
 
         // traiter le pathname si termine par "/"
         if (this.#animal.charAt(this.#animal.length - 1) == '/') {
@@ -16,6 +18,7 @@ export default class extends AbstractView {
         // check if header exist -- in postView header is earased;
         const header = document.querySelector("#header");
         console.log(header.childNodes.length);
+        // Si pas de header, afficher
         if (header.childNodes.length === 0) {
             header.innerHTML = ` <header class="content-on-image box-shadow content-on-image-accueil" id="header">
                                     <img src="/static/assets/img/gerrard_getthings_hero.jpeg" alt="gerrard getthings" class="img-header">
@@ -68,13 +71,12 @@ export default class extends AbstractView {
 
         // récupérer les données du fichier json et passer en paramètre de la fonction search dna la classe AbstractView
         const data = await getData('/static/js/views/data' + this.#animal + 'Data.json');
-        const abstractView = new AbstractView();
-        let res = abstractView.search(data);
+        let res = this.#oAbstractView.search(data);
         const promise = Promise.resolve(res);
         promise.then((value) => {
-            let datas = value;
-            console.log(value)
-            this.cbSearch(datas)
+            this.#datas = value;
+            // console.log(value)
+            this.cbSearch(this.#datas)
         })
 
 
@@ -84,8 +86,7 @@ export default class extends AbstractView {
     cbSearch(datas) {
         let animal = this.#animal;
         // enlever le slash first char fonction crée dans AbstractView
-        let abstractView = new AbstractView;
-        animal = abstractView.typeAnimal(animal);
+        animal = this.#oAbstractView.typeAnimal(animal);
 
 
         let post = `
@@ -136,6 +137,7 @@ export default class extends AbstractView {
                                            </div>
                                        </div>`
                 }
+                // contion de rappel pour associer les url à chaque src d'image
                 function cb(data) {
 
                     let img = document.querySelectorAll(".img-fluid");
@@ -176,20 +178,19 @@ export default class extends AbstractView {
         app.innerHTML = post;
     }
 
-
+    // affichage général
     async getHtml() {
         async function getData(url) {
             console.log(url)
             const response = await fetch(url)
             return response.json()
         }
-        const data = await getData('/static/js/views/data' + this.#animal + 'Data.json');
+        this.#datas = await getData('/static/js/views/data' + this.#animal + 'Data.json');
 
         // titre animal à éditer 
         let animal = this.#animal;
         // enlever le slash first char
-        let abstractView = new AbstractView;
-        animal = abstractView.typeAnimal(animal);
+        animal = this.#oAbstractView.typeAnimal(animal);
 
         let post = `
          <!-- ======= Portfolio Section Ref : BootstrapMade template Tempo======= -->
@@ -214,28 +215,27 @@ export default class extends AbstractView {
 
         let img;
         let url;
-        for (let i in data) {
+        for (let i in this.#datas) {
 
             if (this.#animal.includes("cat")) {
-                if (data[i].hasOwnProperty('reference_image_id')) {
-                    url = 'https://api.thecatapi.com/v1/images/' + data[i]['reference_image_id'];
+                if (this.#datas[i].hasOwnProperty('reference_image_id')) {
+                    url = 'https://api.thecatapi.com/v1/images/' + this.#datas[i]['reference_image_id'];
                     console.log(url);
                     fetch(url)
                         .then((response) => response.json())
                         .then((data) => {
-                            console.log('Success:', data);
                             this.cb(data);
                         })
                         .catch((error) => {
                             console.error('Error:', error);
                         });
                     post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
-                                    <img src="${img}" class="img-fluid" alt="image carte" data-img="${data[i]['reference_image_id']}">
+                                    <img src="${img}" class="img-fluid" alt="image carte" data-img="${this.#datas[i]['reference_image_id']}">
                                     <div class="portfolio-info" style="position:absolute">
-                                        <h4>${data[i]['name']}</h4>
-                                        <p>${data[i]['origin']}</p>
-                                        <a href="${this.#animal}/post-view/${data[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${data[i]['name']}" data-link><i class="bx bx-plus"></i></a>
-                                        <a href="${this.#animal}/post-view/${data[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                                        <h4>${this.#datas[i]['name']}</h4>
+                                        <p>${this.#datas[i]['origin']}</p>
+                                        <a href="${this.#animal}/post-view/${this.#datas[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${this.#datas[i]['name']}" data-link><i class="bx bx-plus"></i></a>
+                                        <a href="${this.#animal}/post-view/${this.#datas[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                                     </div>
                                 </div>`
                 }
@@ -244,16 +244,16 @@ export default class extends AbstractView {
 
             else {
 
-                img = data[i]['image']['url'];
+                img = this.#datas[i]['image']['url'];
 
 
                 post += `<div class="col-lg-4 col-md-6 portfolio-item filter-web" style="position:relative">
                                 <img src="${img}" class="img-fluid" alt="image carte">
                                 <div class="portfolio-info" style="position:absolute">
-                                    <h4>${data[i]['name']}</h4>
-                                    <p>${data[i]['origin']}</p>
-                                    <a href="${this.#animal}/post-view/${data[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${data[i]['name']}" data-link><i class="bx bx-plus"></i></a>
-                                    <a href="${this.#animal}/post-view/${data[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                                    <h4>${this.#datas[i]['name']}</h4>
+                                    <p>${this.#datas[i]['origin']}</p>
+                                    <a href="${this.#animal}/post-view/${this.#datas[i]['id']}" data-gallery="portfolioGallery" class="portfolio-lightbox preview-link" title="${this.#datas[i]['name']}" data-link><i class="bx bx-plus"></i></a>
+                                    <a href="${this.#animal}/post-view/${this.#datas[i]['id']}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>`
             };
