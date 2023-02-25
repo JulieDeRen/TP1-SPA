@@ -205,9 +205,7 @@ export default class extends AbstractView {
         <p>Weight `+article.weight.imperial+` pounds</p>`;
 
         if(article.hasOwnProperty('image')){
-            postView += `<img src="${article.image.url}" alt="image" class="img-post-views">
-            <p><a href='/post' data-link>Retour</a></p>
-            `
+            postView += `<img src="${article.image.url}" alt="image" class="img-post-views">`
         }
         else{
             let url = 'https://api.thecatapi.com/v1/images/' + article.reference_image_id;
