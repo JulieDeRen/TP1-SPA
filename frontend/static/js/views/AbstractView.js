@@ -86,6 +86,7 @@ export default class {
             let aside = document.querySelector("#aside");
             let post = `
                         <nav class="aside-nav">
+                            <a href="/" class="aside__link" data-link>Home</a>
                             <a href="/cat" class="aside__link" data-link>Cat</a>
                             <a href="/dog" class="aside__link" data-link>Dog</a>
                         `;

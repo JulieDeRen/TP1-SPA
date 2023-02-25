@@ -519,6 +519,10 @@ section {
     text-decoration: none;
     color: #eeeeee;
     font-weight: 500;
+    z-index: 60;
+}
+#aside .aside-nav{
+    overflow: hidden;
 }
 
 #aside .aside__link:hover {
@@ -531,6 +535,13 @@ section {
     flex-direction: row;
     justify-content: justify;
     height: 100%;
+}
+#flexbox-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: justify;
+    height: 100%;
+    z-index: -1;
 }
 
 /* -------- Search ----------- */
@@ -578,6 +589,7 @@ section {
 #contact {
     width: 100%;
     padding: 2rem;
+    z-index: -1;
 }
 
 .aside {
