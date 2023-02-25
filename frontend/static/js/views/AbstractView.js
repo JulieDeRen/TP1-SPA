@@ -61,7 +61,6 @@ export default class {
                 return response.json()
             }
             let datas = await getData('/static/js/views/data' + animal + 'Data.json');
-            console.log(datas);
             let aside = document.querySelector("#aside");
             let post = `
                         <nav class="aside-nav">
