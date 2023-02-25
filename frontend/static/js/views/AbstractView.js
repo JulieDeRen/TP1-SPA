@@ -27,6 +27,12 @@ export default class {
             header.src = "/static/assets/img/gerrard_getthings_hero.jpeg"
         }
     }
+    // earase header here
+    deleteHeader(){
+        const header = document.querySelector("#header");
+        console.log(header);
+        header.innerHTML="";
+    }
     // fonction pour la composante aside à construire dans le constructeur de la classe
     aside(){
         let aside = document.querySelector("#aside");
