@@ -490,12 +490,7 @@ section {
     bottom: 0;
     background: #222222;
 }
-.aside {
-    position: relative;
-    width: calc(20vw - 14px); /*var(--nav-width);*/
-    bottom: 0;
-    background: #222222;
-}
+
 #aside nav {
     padding: calc(60px + 2rem) calc(12px + 2rem);
     position: absolute;
@@ -522,7 +517,7 @@ section {
     height: 100%;
 }
 
-/* -------- Form ----------- */
+/* -------- Search ----------- */
 
 #form-inline{
     display: inline-flex;
@@ -537,10 +532,15 @@ section {
     border-radius: 15px;
     padding: 10px 15px;
 }
-#form-inline .btn-outline, 
+#form-inline .btn-outline{
+    border: 1px solid #009579;
+    color: #009579;
+}
+
 #contact .btn-contact:hover{
     border: 1px solid #009579;
     color: #009579;
+    background-color: white;
 }
 #form-inline .btn:hover,
 #contact .btn-contact{
@@ -553,9 +553,16 @@ section {
     border: 1px solid #009579;
     color: #009579;
 }
+/* ---------- Contact section----------- */
 #contact{
     width: 100%;
     padding: 2rem;
+}
+.aside {
+    position: relative;
+    width: calc(20vw - 13px); /*var(--nav-width);*/
+    bottom: 0;
+    background: #222222;
 }
 
 
