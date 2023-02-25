@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     document.body.addEventListener("click", e => {
         // ajouter condition si clique sur icône <i>
         if(e.target.matches("[data-link]")||e.target.classList.contains("bx")){
-            console.log(e.target);
+            // console.log(e.target);
             let element = e.target;
             if(e.target.classList.contains("bx")){
                 element=element.parentElement;

@@ -5,18 +5,11 @@ export default class extends AbstractView {
     #datas;
     constructor(params){
         super(params)
-        this.setTitle("Viewing Post")
-        console.log(params)
+        this.setTitle("Viewing Post");
+        this.deleteHeader();
         console.log("test post view")
         this.#animal = window.location.pathname;
 
-        // switch button redirectionner
-        let switchButton = document.querySelector(".switch-button-checkbox");
-        if(this.#animal.includes("/cat")){
-            switchButton.setAttribute("checked", true);
-            switchButton.classList.toggle("cat")
-        }
-        switchButton.addEventListener("click", this.redirection.bind(this));
         this.deleteHeader();
         this.aside();
 
@@ -26,9 +19,9 @@ export default class extends AbstractView {
     }
 
     async search(e) {
-        console.log(this.#animal)
+        // console.log(this.#animal)
         async function getData(url) {
-            console.log(url)
+            // console.log(url)
             const response = await fetch(url)
             return response.json()
         }
@@ -40,7 +33,9 @@ export default class extends AbstractView {
             this.#animal ="/dog";
         }
         let animal = this.#animal;
-        console.log(animal)
+        // console.log(animal)
+
+        // récupérer les données
         const data = await getData('/static/js/views/data' + this.#animal + 'Data.json');
         // envoyer le set de data en paramètre lorsque bouton click
         const abstractView = new AbstractView();
@@ -48,10 +43,8 @@ export default class extends AbstractView {
         const promise = Promise.resolve(res);
         promise.then((value) => {
             let datas = value;
-            console.log(value)
+            // console.log(value)
             
-
-
             let animal = this.#animal;
             // enlever le slash first char
             let abstractView = new AbstractView;
@@ -151,13 +144,6 @@ export default class extends AbstractView {
 
     }
 
-
-    // earase header here
-    deleteHeader(){
-        const header = document.querySelector("#header");
-        console.log(header);
-        header.innerHTML="";
-    }
     async getHtml() {
        // console.log(this.params.id)
         const nu  = Number(this.params.id)

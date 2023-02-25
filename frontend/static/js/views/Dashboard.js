@@ -8,7 +8,10 @@ export default class extends AbstractView {
         this.#oAbstractView=new AbstractView(this.#datas);
         this.setTitle("Dashboard")
         let inputAnimal = document.querySelector(".switch-button-checkbox");
-        inputAnimal.addEventListener("click", this.redirection.bind(this));
+        // si existe (dans view post existe pas)
+        if(inputAnimal){
+          inputAnimal.addEventListener("click", this.redirection.bind(this));
+        }
 
         // header hero banner selon cat ou dog
         this.imageHeader();

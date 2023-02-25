@@ -565,4 +565,9 @@ section {
     background: #222222;
 }
 
+/* ----------- Image view post ------------ */
+.img-post-views{
+    border-radius: 5px;
+}
+
 
